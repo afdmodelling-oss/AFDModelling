@@ -535,6 +535,16 @@ const setLanguage = (language) => {
   scheduleTextIntroBuild();
 };
 
+const trackApplyClick = (link) => {
+  if (typeof window.gtag !== "function") return;
+
+  window.gtag("event", "apply_cta_click", {
+    cta_text: link.textContent.trim(),
+    link_url: AFD_APPLICATION_FORM_URL,
+    transport_type: "beacon"
+  });
+};
+
 applyLinks.forEach((link) => {
   link.href = AFD_APPLICATION_FORM_URL;
 
@@ -542,6 +552,8 @@ applyLinks.forEach((link) => {
     link.classList.add("form-pending");
     link.setAttribute("aria-disabled", "true");
     link.addEventListener("click", (event) => event.preventDefault());
+  } else {
+    link.addEventListener("click", () => trackApplyClick(link));
   }
 });
 

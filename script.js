@@ -1,4 +1,4 @@
-const AFD_APPLICATION_FORM_URL = "https://docs.google.com/forms/d/e/REPLACE_WITH_AFD_MODELLING_FORM/viewform";
+const AFD_APPLICATION_FORM_URL = "https://forms.gle/bsCiYhpAQTaGUViQ9";
 
 const translations = {
   en: {

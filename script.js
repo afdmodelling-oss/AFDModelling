@@ -1,4 +1,4 @@
-const AFD_APPLICATION_FORM_URL = "https://forms.gle/bsCiYhpAQTaGUViQ9";
+const AFD_APPLICATION_FORM_URL = "/apply/";
 
 const translations = {
   en: {
@@ -24,13 +24,13 @@ const translations = {
     heroKicker: "Roster applications are open now",
     heroTitle: "Apply for the roster.",
     heroText:
-      "AFD is reviewing verified 18+ model applicants now. Send recent headshots, ID, socials, measurements, and availability in one private form. If your look fits, we will contact you with next steps.",
+      "AFD is reviewing verified 18+ model applicants now. Start with a short private application: contact details, city, social link, and the work you want to be considered for. If your look fits, we will contact you for photos and verification.",
     applyModel: "Send your application",
     reviewStandards: "See what to send",
     heroFactOne: "Review open now",
     heroFactTwo: "18+ verified only",
-    heroFactThree: "Photos + ID required",
-    heroFactFour: "Takes about 10 minutes",
+    heroFactThree: "No ID upload to start",
+    heroFactFour: "Takes about 60 seconds",
     povKicker: "Why apply now",
     povTitle: "If your look fits, we want to see it.",
     povText:
@@ -38,37 +38,37 @@ const translations = {
     povLink: "Send your application",
     standardsKicker: "What to send",
     standardsTitle: "Have these ready before you start.",
-    standardOneTitle: "Current photos",
-    standardOneText: "Clear headshot, profile, and full-body photos shot in natural light. Keep it current, simple, and true to you.",
+    standardOneTitle: "A current social link",
+    standardOneText: "Send Instagram, TikTok, portfolio, or a page with current photos. We will request digitals later if there is a fit.",
     standardTwoTitle: "Your market",
     standardTwoText: "Tell us where you are based, how often you can shoot, and whether travel is realistic.",
     standardThreeTitle: "Your goals",
     standardThreeText:
       "Tell us the kinds of modelling work you want, the experience you bring, and the opportunities you want to be considered for.",
     standardFourTitle: "Verification",
-    standardFourText: "AFD considers 18+ applicants only. A clear ID image is required in the private form.",
+    standardFourText: "AFD considers 18+ applicants only. ID verification happens only after selected applicants are contacted.",
     processKicker: "How review works",
     processTitle: "Submit once. We review fast and privately.",
     stepOneTitle: "Start the form",
-    stepOneText: "Complete the private form with contact details, socials, measurements, and availability.",
-    stepTwoTitle: "Upload your look",
-    stepTwoText: "Upload headshots and optional digitals so we can understand your angles quickly.",
+    stepOneText: "Complete the short private form with contact details, location, socials, and work interests.",
+    stepTwoTitle: "Share your look",
+    stepTwoText: "Use a current social or portfolio link first. We will ask selected applicants for digitals later.",
     stepThreeTitle: "Confirm eligibility",
     stepThreeText: "Confirm age and consent before any casting conversation begins.",
     stepFourTitle: "Watch for next steps",
     stepFourText: "If there is a fit, we will contact you with a casting note or booking conversation.",
     privacyKicker: "Private by default",
-    privacyTitle: "Your ID and details stay private.",
+    privacyTitle: "The first step stays simple.",
     privacyText:
-      "The application collects ID, headshots, contact details, availability, and portfolio information privately. Only selected applicants are contacted for next steps.",
-    privacyOne: "ID is used for age verification.",
+      "The first application collects contact details, location, socials, and work interests privately. Only selected applicants are contacted for photos, verification, and next steps.",
+    privacyOne: "No ID upload is needed in the first form.",
     privacyTwo: "Applicants can share the modelling work they want to be considered for.",
     privacyThree: "Only selected applicants are contacted for next steps.",
     ctaKicker: "Applications are open now",
     ctaTitle: "Send your application today.",
-    ctaText: "A complete application gives AFD enough to decide faster. Use current photos and direct answers.",
-    ctaReqOne: "Recent headshots",
-    ctaReqTwo: "Government ID",
+    ctaText: "Start with the short application. It gives AFD enough to decide whether to contact you for the next step.",
+    ctaReqOne: "Contact details",
+    ctaReqTwo: "18+ confirmation",
     ctaReqThree: "Social links",
     footerText: "Fashion-first casting for verified adult applicants.",
     pendingTitle: "Google Form link pending",
@@ -553,6 +553,12 @@ applyLinks.forEach((link) => {
     link.setAttribute("aria-disabled", "true");
     link.addEventListener("click", (event) => event.preventDefault());
   } else {
+    const linkUrl = new URL(AFD_APPLICATION_FORM_URL, window.location.href);
+    if (linkUrl.origin === window.location.origin) {
+      link.removeAttribute("target");
+      link.removeAttribute("rel");
+    }
+
     link.addEventListener("click", () => trackApplyClick(link));
   }
 });

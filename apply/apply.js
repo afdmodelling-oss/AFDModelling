@@ -5,6 +5,13 @@ const submitFrame = document.querySelector(".submit-frame");
 const submitButton = document.querySelector(".form-submit");
 const locationField = document.querySelector("[data-location-field]");
 const languageSelect = document.querySelector("#language-select");
+const workOptionsField = document.querySelector("[data-work-options]");
+
+const SHOW_EXPLICIT_ADULT_CONTENT_OPTION = false;
+const EXPLICIT_ADULT_CONTENT_OPTION = {
+  labelKey: "workAdult",
+  value: "Explicit adult content"
+};
 
 const languageCodes = {
   en: "en",
@@ -319,6 +326,25 @@ const setError = (key) => {
   errorMessage.textContent = key ? translate(key) : "";
 };
 
+const addExplicitAdultContentOption = () => {
+  if (!SHOW_EXPLICIT_ADULT_CONTENT_OPTION || !workOptionsField) return;
+  if (workOptionsField.querySelector(`[value="${EXPLICIT_ADULT_CONTENT_OPTION.value}"]`)) return;
+
+  const label = document.createElement("label");
+  const input = document.createElement("input");
+  const text = document.createElement("span");
+
+  input.type = "checkbox";
+  input.name = "entry.1720834154";
+  input.value = EXPLICIT_ADULT_CONTENT_OPTION.value;
+
+  text.dataset.i18n = EXPLICIT_ADULT_CONTENT_OPTION.labelKey;
+  text.textContent = translate(EXPLICIT_ADULT_CONTENT_OPTION.labelKey);
+
+  label.append(input, " ", text);
+  workOptionsField.append(label);
+};
+
 const setLanguage = (language, options = {}) => {
   currentLanguage = resolveLanguage(language) || "en";
   const dictionary = getDictionary();
@@ -367,6 +393,7 @@ const track = (eventName, parameters = {}) => {
 
 const getCheckedInterests = () => [...form.querySelectorAll('input[name="entry.1720834154"]:checked')];
 
+addExplicitAdultContentOption();
 languageSelect?.addEventListener("change", (event) => setLanguage(event.target.value, { persist: true }));
 setLanguage(getInitialLanguage());
 
@@ -390,7 +417,7 @@ form?.addEventListener("submit", (event) => {
   const city = String(data.get("city") || "").trim();
   const country = String(data.get("country") || "").trim();
   locationField.value = [city, country].filter(Boolean).join(", ");
-  const adultContentSelected = getCheckedInterests().some((input) => input.value === "Explicit adult content");
+  const adultContentSelected = getCheckedInterests().some((input) => input.value === EXPLICIT_ADULT_CONTENT_OPTION.value);
 
   submitted = true;
   form.classList.add("is-submitting");

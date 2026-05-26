@@ -7,7 +7,7 @@ const locationField = document.querySelector("[data-location-field]");
 const languageSelect = document.querySelector("#language-select");
 const workOptionsField = document.querySelector("[data-work-options]");
 
-const SHOW_EXPLICIT_ADULT_CONTENT_OPTION = true;
+const SHOW_EXPLICIT_ADULT_CONTENT_OPTION = false;
 const EXPLICIT_ADULT_CONTENT_OPTION = {
   labelKey: "workAdult",
   value: "Explicit adult content"

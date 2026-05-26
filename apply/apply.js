@@ -41,7 +41,14 @@ form?.addEventListener("submit", (event) => {
   const data = new FormData(form);
   const city = String(data.get("city") || "").trim();
   const country = String(data.get("country") || "").trim();
+  const widerOpportunities = String(data.get("wider_opportunities") || "").trim();
   locationField.value = [city, country].filter(Boolean).join(", ");
+
+  const portfolioField = form.querySelector('[name="entry.266439194"]');
+  if (portfolioField && widerOpportunities) {
+    const portfolioValue = portfolioField.value.trim();
+    portfolioField.value = [portfolioValue, `Wider opportunities: ${widerOpportunities}`].filter(Boolean).join(" | ");
+  }
 
   submitted = true;
   form.classList.add("is-submitting");
@@ -50,7 +57,8 @@ form?.addEventListener("submit", (event) => {
 
   track("lead_form_submit", {
     form_name: "short_application",
-    work_interest_count: getCheckedInterests().length
+    work_interest_count: getCheckedInterests().length,
+    wider_opportunities: widerOpportunities
   });
 });
 

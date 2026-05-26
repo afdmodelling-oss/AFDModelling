@@ -15,6 +15,16 @@ const languageCodes = {
   ru: "ru"
 };
 
+const languageAliases = {
+  en: "en",
+  th: "th",
+  tl: "tl",
+  fil: "tl",
+  km: "km",
+  es: "es",
+  ru: "ru"
+};
+
 const translations = {
   en: {
     metaTitle: "Start Your Application | AFD Modelling",
@@ -263,9 +273,42 @@ let currentLanguage = "en";
 
 const getDictionary = () => translations[currentLanguage] || translations.en;
 
-const getSavedLanguage = () => {
-  const saved = window.localStorage.getItem("afd-language");
-  return translations[saved] ? saved : "en";
+const resolveLanguage = (language) => {
+  const normalized = String(language || "").trim().toLowerCase().replace("_", "-");
+  if (!normalized) return null;
+  if (translations[normalized]) return normalized;
+
+  const primary = normalized.split("-")[0];
+  return languageAliases[primary] || null;
+};
+
+const getStoredLanguage = () => {
+  try {
+    return resolveLanguage(window.localStorage.getItem("afd-language"));
+  } catch {
+    return null;
+  }
+};
+
+const getBrowserLanguage = () => {
+  const candidates = [...(navigator.languages || []), navigator.language, navigator.userLanguage];
+
+  for (const candidate of candidates) {
+    const language = resolveLanguage(candidate);
+    if (language) return language;
+  }
+
+  return "en";
+};
+
+const getInitialLanguage = () => getStoredLanguage() || getBrowserLanguage();
+
+const persistLanguage = (language) => {
+  try {
+    window.localStorage.setItem("afd-language", language);
+  } catch {
+    // Some browser privacy modes block storage. The form should still translate.
+  }
 };
 
 const translate = (key) => getDictionary()[key] || translations.en[key] || "";
@@ -276,8 +319,8 @@ const setError = (key) => {
   errorMessage.textContent = key ? translate(key) : "";
 };
 
-const setLanguage = (language) => {
-  currentLanguage = translations[language] ? language : "en";
+const setLanguage = (language, options = {}) => {
+  currentLanguage = resolveLanguage(language) || "en";
   const dictionary = getDictionary();
 
   document.documentElement.lang = languageCodes[currentLanguage] || "en";
@@ -311,7 +354,7 @@ const setLanguage = (language) => {
   }
   if (errorMessage?.dataset.errorKey) setError(errorMessage.dataset.errorKey);
 
-  window.localStorage.setItem("afd-language", currentLanguage);
+  if (options.persist) persistLanguage(currentLanguage);
 };
 
 const track = (eventName, parameters = {}) => {
@@ -324,8 +367,8 @@ const track = (eventName, parameters = {}) => {
 
 const getCheckedInterests = () => [...form.querySelectorAll('input[name="entry.1720834154"]:checked')];
 
-languageSelect?.addEventListener("change", (event) => setLanguage(event.target.value));
-setLanguage(getSavedLanguage());
+languageSelect?.addEventListener("change", (event) => setLanguage(event.target.value, { persist: true }));
+setLanguage(getInitialLanguage());
 
 form?.addEventListener("submit", (event) => {
   setError("");

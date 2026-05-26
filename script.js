@@ -488,15 +488,59 @@ const languageCodes = {
   ru: "ru"
 };
 
-const getSavedLanguage = () => {
-  const saved = window.localStorage.getItem("afd-language");
-  return translations[saved] ? saved : "en";
+const languageAliases = {
+  en: "en",
+  th: "th",
+  tl: "tl",
+  fil: "tl",
+  km: "km",
+  es: "es",
+  ru: "ru"
 };
 
-const setLanguage = (language) => {
-  const dictionary = translations[language] || translations.en;
+const resolveLanguage = (language) => {
+  const normalized = String(language || "").trim().toLowerCase().replace("_", "-");
+  if (!normalized) return null;
+  if (translations[normalized]) return normalized;
 
-  document.documentElement.lang = languageCodes[language] || "en";
+  const primary = normalized.split("-")[0];
+  return languageAliases[primary] || null;
+};
+
+const getStoredLanguage = () => {
+  try {
+    return resolveLanguage(window.localStorage.getItem("afd-language"));
+  } catch {
+    return null;
+  }
+};
+
+const getBrowserLanguage = () => {
+  const candidates = [...(navigator.languages || []), navigator.language, navigator.userLanguage];
+
+  for (const candidate of candidates) {
+    const language = resolveLanguage(candidate);
+    if (language) return language;
+  }
+
+  return "en";
+};
+
+const getInitialLanguage = () => getStoredLanguage() || getBrowserLanguage();
+
+const persistLanguage = (language) => {
+  try {
+    window.localStorage.setItem("afd-language", language);
+  } catch {
+    // Some browser privacy modes block storage. The page should still translate.
+  }
+};
+
+const setLanguage = (language, options = {}) => {
+  const resolvedLanguage = resolveLanguage(language) || "en";
+  const dictionary = translations[resolvedLanguage] || translations.en;
+
+  document.documentElement.lang = languageCodes[resolvedLanguage] || "en";
   document.title = dictionary.metaTitle;
 
   const description = document.querySelector('meta[name="description"]');
@@ -530,8 +574,8 @@ const setLanguage = (language) => {
     }
   });
 
-  if (languageSelect) languageSelect.value = language;
-  window.localStorage.setItem("afd-language", language);
+  if (languageSelect) languageSelect.value = resolvedLanguage;
+  if (options.persist) persistLanguage(resolvedLanguage);
   scheduleTextIntroBuild();
 };
 
@@ -564,7 +608,7 @@ applyLinks.forEach((link) => {
 });
 
 if (languageSelect) {
-  languageSelect.addEventListener("change", (event) => setLanguage(event.target.value));
+  languageSelect.addEventListener("change", (event) => setLanguage(event.target.value, { persist: true }));
 }
 
 const TEXT_INTRO_SELECTOR = "h1, h2, .kicker, .info-row h3, .steps span";
@@ -758,7 +802,7 @@ if (document.fonts) {
   });
 }
 
-setLanguage(getSavedLanguage());
+setLanguage(getInitialLanguage());
 
 document.body.classList.add("is-ready");
 

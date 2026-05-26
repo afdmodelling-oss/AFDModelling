@@ -39,12 +39,11 @@ const translations = {
     workEditorial: "Editorial",
     workSocial: "Social content",
     workSwimwear: "Swimwear",
+    workAdult: "Explicit adult content",
     comfortLegend: "Comfort on camera *",
-    widerLegend: "Are you open to discussing a wider range of paid modelling opportunities? *",
     yes: "Yes",
     no: "No",
     maybe: "Maybe",
-    openDiscussing: "Open to discussing",
     travelLabel: "Can you travel for shoots?",
     consentLabel: "I confirm I am 18 or older and AFD may contact me about roster review.",
     submitButton: "Send first application",
@@ -80,12 +79,11 @@ const translations = {
     workEditorial: "เอดิทอเรียล",
     workSocial: "คอนเทนต์โซเชียล",
     workSwimwear: "ชุดว่ายน้ำ",
+    workAdult: "คอนเทนต์ผู้ใหญ่แบบชัดเจน",
     comfortLegend: "ความมั่นใจหน้ากล้อง *",
-    widerLegend: "คุณเปิดรับการพูดคุยเกี่ยวกับโอกาสงานโมเดลแบบชำระเงินที่หลากหลายขึ้นหรือไม่? *",
     yes: "ใช่",
     no: "ไม่",
     maybe: "อาจจะ",
-    openDiscussing: "เปิดรับการพูดคุย",
     travelLabel: "คุณเดินทางไปถ่ายงานได้ไหม?",
     consentLabel: "ฉันยืนยันว่าฉันอายุ 18 ปีขึ้นไป และ AFD สามารถติดต่อฉันเกี่ยวกับการพิจารณารอสเตอร์ได้",
     submitButton: "ส่งใบสมัครขั้นแรก",
@@ -121,12 +119,11 @@ const translations = {
     workEditorial: "Editorial",
     workSocial: "Social content",
     workSwimwear: "Swimwear",
+    workAdult: "Explicit adult content",
     comfortLegend: "Comfort sa camera *",
-    widerLegend: "Open ka bang pag-usapan ang mas malawak na paid modelling opportunities? *",
     yes: "Oo",
     no: "Hindi",
     maybe: "Maybe",
-    openDiscussing: "Open to discussing",
     travelLabel: "Puwede ka bang bumiyahe para sa shoots?",
     consentLabel: "Kinukumpirma kong 18 o mas matanda ako at maaaring kontakin ako ng AFD tungkol sa roster review.",
     submitButton: "Send first application",
@@ -162,12 +159,11 @@ const translations = {
     workEditorial: "Editorial",
     workSocial: "មាតិកាសង្គម",
     workSwimwear: "Swimwear",
+    workAdult: "មាតិកាមនុស្សពេញវ័យជាក់លាក់",
     comfortLegend: "ភាពស្រួលនៅមុខកាមេរ៉ា *",
-    widerLegend: "តើអ្នកបើកចិត្តពិភាក្សាអំពីឱកាសម៉ូដែលបង់ប្រាក់ដែលទូលំទូលាយជាងនេះទេ? *",
     yes: "បាទ/ចាស",
     no: "ទេ",
     maybe: "ប្រហែល",
-    openDiscussing: "បើកចិត្តពិភាក្សា",
     travelLabel: "តើអ្នកអាចធ្វើដំណើរសម្រាប់ការថតបានទេ?",
     consentLabel: "ខ្ញុំបញ្ជាក់ថាខ្ញុំមានអាយុ 18 ឆ្នាំឡើងទៅ ហើយ AFD អាចទាក់ទងខ្ញុំអំពីការពិនិត្យរូស្ទ័រ។",
     submitButton: "ផ្ញើពាក្យដំបូង",
@@ -203,12 +199,11 @@ const translations = {
     workEditorial: "Editorial",
     workSocial: "Contenido social",
     workSwimwear: "Traje de baño",
+    workAdult: "Contenido adulto explícito",
     comfortLegend: "Comodidad frente a cámara *",
-    widerLegend: "¿Estás abierta a hablar sobre una gama más amplia de oportunidades pagadas de modelaje? *",
     yes: "Sí",
     no: "No",
     maybe: "Tal vez",
-    openDiscussing: "Abierta a hablarlo",
     travelLabel: "¿Puedes viajar para sesiones?",
     consentLabel: "Confirmo que tengo 18 años o más y que AFD puede contactarme sobre la revisión del roster.",
     submitButton: "Enviar primera aplicación",
@@ -244,12 +239,11 @@ const translations = {
     workEditorial: "Editorial",
     workSocial: "Социальный контент",
     workSwimwear: "Swimwear",
+    workAdult: "Явный контент для взрослых",
     comfortLegend: "Уверенность перед камерой *",
-    widerLegend: "Вы готовы обсудить более широкий круг оплачиваемых модельных возможностей? *",
     yes: "Да",
     no: "Нет",
     maybe: "Возможно",
-    openDiscussing: "Готова обсудить",
     travelLabel: "Вы можете выезжать на съемки?",
     consentLabel: "Я подтверждаю, что мне 18 лет или больше, и AFD может связаться со мной по поводу рассмотрения в ростер.",
     submitButton: "Отправить первую заявку",
@@ -352,14 +346,8 @@ form?.addEventListener("submit", (event) => {
   const data = new FormData(form);
   const city = String(data.get("city") || "").trim();
   const country = String(data.get("country") || "").trim();
-  const widerOpportunities = String(data.get("wider_opportunities") || "").trim();
   locationField.value = [city, country].filter(Boolean).join(", ");
-
-  const portfolioField = form.querySelector('[name="entry.266439194"]');
-  if (portfolioField && widerOpportunities) {
-    const portfolioValue = portfolioField.value.trim();
-    portfolioField.value = [portfolioValue, `Wider opportunities: ${widerOpportunities}`].filter(Boolean).join(" | ");
-  }
+  const adultContentSelected = getCheckedInterests().some((input) => input.value === "Explicit adult content");
 
   submitted = true;
   form.classList.add("is-submitting");
@@ -369,7 +357,7 @@ form?.addEventListener("submit", (event) => {
   track("lead_form_submit", {
     form_name: "short_application",
     work_interest_count: getCheckedInterests().length,
-    wider_opportunities: widerOpportunities
+    adult_content_selected: adultContentSelected
   });
 });
 

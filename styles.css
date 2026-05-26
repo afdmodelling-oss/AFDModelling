@@ -16,6 +16,10 @@
   box-sizing: border-box;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 html {
   overflow-x: clip;
   scroll-behavior: smooth;
@@ -972,6 +976,64 @@ p {
 
 .form-success {
   padding: clamp(1rem, 2vw, 2rem) 0;
+}
+
+.form-success:focus {
+  outline: none;
+}
+
+.application-page.is-application-sent {
+  min-height: 100vh;
+  background: var(--canvas);
+}
+
+.application-page.is-application-sent .site-header,
+.application-page.is-application-sent .application-intro {
+  display: none;
+}
+
+.application-page.is-application-sent .application-shell {
+  display: block;
+  width: min(100%, 1440px);
+  min-height: 100vh;
+  padding: clamp(1.1rem, 3.5vw, 2rem) clamp(1.25rem, 4vw, 4rem) clamp(3rem, 7vw, 6rem);
+}
+
+.application-page.is-application-sent .application-panel {
+  max-width: 46rem;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+}
+
+.application-page.is-application-sent .form-success {
+  padding: 0;
+}
+
+.application-page.is-application-sent .form-success h2 {
+  max-width: 9.5ch;
+  margin: 0 0 clamp(0.9rem, 2vw, 1.25rem);
+  font-size: clamp(4.25rem, 10vw, 7rem);
+  line-height: 0.9;
+}
+
+.application-page.is-application-sent .form-success p:not(.kicker) {
+  max-width: 42rem;
+  margin: 0 0 clamp(1.7rem, 4vw, 2.4rem);
+  color: var(--muted);
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  line-height: 1.45;
+}
+
+.application-page.is-application-sent .form-success .kicker {
+  margin-bottom: clamp(1.15rem, 3vw, 1.6rem);
+  color: oklch(0.42 0.05 55);
+}
+
+.application-page.is-application-sent .form-success .text-link {
+  display: inline-block;
 }
 
 .submit-frame {

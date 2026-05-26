@@ -442,5 +442,7 @@ submitFrame?.addEventListener("load", () => {
 
   form.hidden = true;
   successMessage.hidden = false;
-  successMessage.focus?.();
+  document.body.classList.add("is-application-sent");
+  window.scrollTo({ top: 0, behavior: "auto" });
+  successMessage.focus({ preventScroll: true });
 });

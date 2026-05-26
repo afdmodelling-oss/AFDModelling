@@ -32,11 +32,11 @@
     <link rel="stylesheet" href="../styles.css?v=lead-form" />
   </head>
   <body class="application-page">
-    <a class="skip-link" href="#application-form">Skip to form</a>
+    <a class="skip-link" href="#application-form" data-i18n="skip">Skip to form</a>
 
-    <header class="site-header" aria-label="Application navigation">
+    <header class="site-header" aria-label="Application navigation" data-i18n-attr="aria-label:ariaApplicationNav">
       <nav class="nav-shell application-nav">
-        <a class="brand" href="../" aria-label="AFD Modelling home">
+        <a class="brand" href="../" aria-label="AFD Modelling home" data-i18n-attr="aria-label:ariaHome">
           <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
             <path d="M17 50 31 14h7l14 36" />
             <path d="M24 34h21" />
@@ -49,18 +49,29 @@
         </a>
 
         <div class="nav-actions">
-          <a class="text-link" href="../">Back to site</a>
+          <label class="language-control">
+            <span data-i18n="languageLabel">Language</span>
+            <select id="language-select" aria-label="Select language" data-i18n-attr="aria-label:languageAria">
+              <option value="en">EN</option>
+              <option value="th">ไทย</option>
+              <option value="tl">Filipino</option>
+              <option value="km">ខ្មែរ</option>
+              <option value="es">Español</option>
+              <option value="ru">Русский</option>
+            </select>
+          </label>
+          <a class="text-link" href="../" data-i18n="backToSite">Back to site</a>
         </div>
       </nav>
     </header>
 
     <main class="application-shell">
       <section class="application-intro" aria-labelledby="apply-title">
-        <p class="kicker">First step</p>
-        <h1 id="apply-title">Start your application.</h1>
+        <p class="kicker" data-i18n="introKicker">First step</p>
+        <h1 id="apply-title" data-i18n="introTitle">Start your application.</h1>
       </section>
 
-      <section class="application-panel" aria-labelledby="form-title">
+      <section class="application-panel" aria-label="Application form" data-i18n-attr="aria-label:formAria">
         <form
           id="application-form"
           class="lead-form"
@@ -82,41 +93,47 @@
 
           <div class="field-grid">
             <label class="form-field">
-              <span>Name *</span>
+              <span data-i18n="nameLabel">Name *</span>
               <input name="entry.1805060100" autocomplete="name" required />
             </label>
 
             <label class="form-field">
-              <span>WhatsApp or Line *</span>
+              <span data-i18n="contactLabel">WhatsApp or Line *</span>
               <input name="entry.1389442767" autocomplete="tel" required />
             </label>
 
             <label class="form-field">
-              <span>City *</span>
+              <span data-i18n="cityLabel">City *</span>
               <input name="city" autocomplete="address-level2" required />
             </label>
 
             <label class="form-field">
-              <span>Country *</span>
+              <span data-i18n="countryLabel">Country *</span>
               <input name="country" autocomplete="country-name" required />
             </label>
 
             <label class="form-field">
-              <span>Instagram, TikTok, or portfolio *</span>
-              <input name="entry.49493842" inputmode="url" placeholder="@username or link" required />
+              <span data-i18n="socialLabel">Instagram, TikTok, or portfolio *</span>
+              <input
+                name="entry.49493842"
+                inputmode="url"
+                placeholder="@username or link"
+                data-i18n-attr="placeholder:socialPlaceholder"
+                required
+              />
             </label>
           </div>
 
           <fieldset class="choice-field">
-            <legend>What work do you want to be considered for? *</legend>
-            <label><input type="checkbox" name="entry.1720834154" value="Fashion" /> Fashion</label>
-            <label><input type="checkbox" name="entry.1720834154" value="Editorial" /> Editorial</label>
-            <label><input type="checkbox" name="entry.1720834154" value="Social media influencer videos" /> Social content</label>
-            <label><input type="checkbox" name="entry.1720834154" value="Swimwear" /> Swimwear</label>
+            <legend data-i18n="workLegend">What work do you want to be considered for? *</legend>
+            <label><input type="checkbox" name="entry.1720834154" value="Fashion" /> <span data-i18n="workFashion">Fashion</span></label>
+            <label><input type="checkbox" name="entry.1720834154" value="Editorial" /> <span data-i18n="workEditorial">Editorial</span></label>
+            <label><input type="checkbox" name="entry.1720834154" value="Social media influencer videos" /> <span data-i18n="workSocial">Social content</span></label>
+            <label><input type="checkbox" name="entry.1720834154" value="Swimwear" /> <span data-i18n="workSwimwear">Swimwear</span></label>
           </fieldset>
 
           <fieldset class="choice-field compact-choice">
-            <legend>Comfort on camera *</legend>
+            <legend data-i18n="comfortLegend">Comfort on camera *</legend>
             <label><input type="radio" name="entry.1772006111" value="1" required /> 1</label>
             <label><input type="radio" name="entry.1772006111" value="2" /> 2</label>
             <label><input type="radio" name="entry.1772006111" value="3" checked /> 3</label>
@@ -125,39 +142,44 @@
           </fieldset>
 
           <fieldset class="choice-field discussion-choice">
-            <legend>Are you open to discussing a wider range of paid modelling opportunities? *</legend>
-            <label><input type="radio" name="wider_opportunities" value="Yes" required /> Yes</label>
-            <label><input type="radio" name="wider_opportunities" value="No" /> No</label>
-            <label><input type="radio" name="wider_opportunities" value="Open to discussing" /> Open to discussing</label>
+            <legend data-i18n="widerLegend">Are you open to discussing a wider range of paid modelling opportunities? *</legend>
+            <label><input type="radio" name="wider_opportunities" value="Yes" required /> <span data-i18n="yes">Yes</span></label>
+            <label><input type="radio" name="wider_opportunities" value="No" /> <span data-i18n="no">No</span></label>
+            <label><input type="radio" name="wider_opportunities" value="Open to discussing" /> <span data-i18n="openDiscussing">Open to discussing</span></label>
           </fieldset>
 
           <label class="form-field form-field-wide">
-            <span>Can you travel for shoots?</span>
+            <span data-i18n="travelLabel">Can you travel for shoots?</span>
             <select name="entry.895753629">
-              <option value="Maybe">Maybe</option>
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
+              <option value="Maybe" data-i18n="maybe">Maybe</option>
+              <option value="Yes" data-i18n="yes">Yes</option>
+              <option value="No" data-i18n="no">No</option>
             </select>
           </label>
 
           <label class="consent-check">
             <input type="checkbox" name="age_confirmed" required />
-            <span>I confirm I am 18 or older and AFD may contact me about roster review.</span>
+            <span data-i18n="consentLabel">I confirm I am 18 or older and AFD may contact me about roster review.</span>
           </label>
 
           <p class="form-error" id="form-error" role="alert"></p>
 
-          <button class="button form-submit" type="submit">Send first application</button>
+          <button class="button form-submit" type="submit" data-i18n="submitButton">Send first application</button>
         </form>
 
         <div class="form-success" id="form-success" aria-live="polite" hidden>
-          <p class="kicker">Application sent</p>
-          <h2>We have your first details.</h2>
-          <p>If your look fits the roster, AFD will contact you privately for the next step.</p>
-          <a class="text-link" href="../">Return to site</a>
+          <p class="kicker" data-i18n="successKicker">Application sent</p>
+          <h2 data-i18n="successTitle">We have your first details.</h2>
+          <p data-i18n="successText">If your look fits the roster, AFD will contact you privately for the next step.</p>
+          <a class="text-link" href="../" data-i18n="returnToSite">Return to site</a>
         </div>
 
-        <iframe class="submit-frame" name="afd-submit-frame" title="Application submission"></iframe>
+        <iframe
+          class="submit-frame"
+          name="afd-submit-frame"
+          title="Application submission"
+          data-i18n-attr="title:submitFrameTitle"
+        ></iframe>
       </section>
     </main>
 

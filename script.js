@@ -1,8 +1,8 @@
-const AFD_APPLICATION_FORM_URL = "/apply/";
+const AFD_APPLICATION_FORM_URL = "/";
 
 const translations = {
   en: {
-    metaTitle: "AFD Modelling | Apply Now",
+    metaTitle: "AFD Modelling | About",
     metaDescription:
       "Apply to AFD Modelling while roster review is open for verified 18+ model applicants.",
     skip: "Skip to content",
@@ -80,7 +80,7 @@ const translations = {
     altProcess: "Close beauty portrait with green backdrop and skincare styling"
   },
   th: {
-    metaTitle: "AFD Modelling | สมัครตอนนี้",
+    metaTitle: "AFD Modelling | เกี่ยวกับ",
     metaDescription: "สมัครกับ AFD Modelling ขณะที่รอสเตอร์เปิดรับผู้สมัครโมเดลอายุ 18 ปีขึ้นไปที่ยืนยันตัวตนแล้ว",
     skip: "ข้ามไปยังเนื้อหา",
     ariaPrimary: "เมนูหลัก",
@@ -156,7 +156,7 @@ const translations = {
     altProcess: "พอร์ตเทรตบิวตี้ระยะใกล้พร้อมฉากหลังสีเขียวและสไตลิงสกินแคร์"
   },
   tl: {
-    metaTitle: "AFD Modelling | Apply Now",
+    metaTitle: "AFD Modelling | About",
     metaDescription:
       "Mag-apply sa AFD Modelling habang bukas ang roster review para sa verified 18+ model applicants.",
     skip: "Lumaktaw sa nilalaman",
@@ -235,7 +235,7 @@ const translations = {
 };
 
 translations.km = {
-  metaTitle: "AFD Modelling | ដាក់ពាក្យឥឡូវ",
+  metaTitle: "AFD Modelling | អំពី",
   metaDescription:
     "ដាក់ពាក្យទៅ AFD Modelling ខណៈពេលការពិនិត្យរូស្ទ័របើកសម្រាប់អ្នកដាក់ពាក្យម៉ូដែលអាយុ 18+ ដែលបានផ្ទៀងផ្ទាត់។",
   skip: "រំលងទៅមាតិកា",
@@ -314,7 +314,7 @@ translations.km = {
 };
 
 translations.es = {
-  metaTitle: "AFD Modelling | Solicita ahora",
+  metaTitle: "AFD Modelling | Acerca de",
   metaDescription:
     "Solicita entrar a AFD Modelling mientras la revisión de roster está abierta para modelos verificados de 18 años o más.",
   skip: "Saltar al contenido",
@@ -394,7 +394,7 @@ translations.es = {
 };
 
 translations.ru = {
-  metaTitle: "AFD Modelling | Подать заявку",
+  metaTitle: "AFD Modelling | О нас",
   metaDescription:
     "Подайте заявку в AFD Modelling, пока открыт отбор в ростер для подтвержденных моделей 18+.",
   skip: "Перейти к содержимому",
